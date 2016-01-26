@@ -49,7 +49,7 @@ def test_my_server():  #pragma: no cover
 
     def get_url(local_url):
         port = application.config['TEST_SERVER_PORT']
-        url = 'http://localhost:{0}'.format(port)
+        url = 'http://localhost:{}'.format(port)
         return "/".join([url, local_url])
 
     def get_percent_url(fraction, total):
@@ -69,7 +69,6 @@ def test_my_server():  #pragma: no cover
         check_fraction(0, 0, '0 of 0 is 0%')
 
     finally:
-        driver.get(get_url('shutdown'))
         driver.close()
         # A bit of hack this but currently there is some bug I believe in
         # the phantomjs code rather than selenium, but in any case it means that

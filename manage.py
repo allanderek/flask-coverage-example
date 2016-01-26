@@ -22,6 +22,7 @@ def run_with_test_server(test_command, coverage):
     is True, then we run the server under coverage analysis and produce a
     coverge report."""
     import subprocess
+    import urllib
     coverage_prefix = ["coverage", "run", "--source", "app.main"]
     server_command_prefx = coverage_prefix if coverage else ['python']
     server_command = server_command_prefx + ["manage.py", "run_test_server"]
@@ -33,6 +34,10 @@ def run_with_test_server(test_command, coverage):
             break
     test_process = subprocess.Popen(test_command)
     test_process.wait(timeout=60)
+    port = application.config['TEST_SERVER_PORT']
+    shutdown_url = 'http://localhost:{}/shutdown'.format(port)
+    response = urllib.request.urlopen(shutdown_url)
+    print(bytes.decode(response.read()))
     server_return_code = server.wait(timeout=60)
     if coverage:
         os.system("coverage report -m")
