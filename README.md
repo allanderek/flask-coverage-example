@@ -11,7 +11,7 @@ You should then be able to look in the `htmlcov` directory to see the source
 marked-up with all the lines ran. Specially open the file
 `htmlcov/app_main_py.html`.
 
-To see a an example of a missing line, locate the lines:
+To see an example of a missing line, locate the lines:
 
     try:
         check_fraction(50, 100, '50 of 100 is 50%')
